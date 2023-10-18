@@ -2,7 +2,7 @@ package com.maltadev.helpdesk.domain.enums;
 
 public enum Prioridade {
 
-	ADMIN(0, "BAIXA"), CLIENTE(1, "MEDIA"), TECNICO(2, "ALTA");
+	BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 
 	private Integer codigo;
 	private String descricao;

@@ -2,7 +2,7 @@ package com.maltadev.helpdesk.domain.enums;
 
 public enum Status {
 
-	ADMIN(0, "ABERTO"), CLIENTE(1, "ANDAMENTO"), TECNICO(2, "ENCERRADO");
+	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
 
 	private Integer codigo;
 	private String descricao;
