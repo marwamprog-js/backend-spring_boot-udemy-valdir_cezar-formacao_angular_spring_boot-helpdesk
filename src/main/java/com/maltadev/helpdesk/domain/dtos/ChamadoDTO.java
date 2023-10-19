@@ -3,6 +3,9 @@ package com.maltadev.helpdesk.domain.dtos;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.maltadev.helpdesk.domain.Chamado;
 
@@ -15,12 +18,30 @@ public class ChamadoDTO implements Serializable {
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	
+	@NotNull(message = "O Campo Prioridade é requerido")
+	@NotBlank(message = "O Campo Prioridade é requerido")
 	private Integer prioridade;
+	
+	@NotNull(message = "O Campo Status é requerido")
+	@NotBlank(message = "O Campo Status é requerido")
 	private Integer status;
+	
+	@NotNull(message = "O Campo Observações é requerido")
 	private String observacoes;
+	
+	@NotNull(message = "O Campo Titulo é requerido")
+	@NotBlank(message = "O Campo Titulo é requerido")
 	private String titulo;
+	
+	@NotNull(message = "O Campo Tecnico é requerido")
+	@NotBlank(message = "O Campo Tecnico é requerido")
 	private Long tecnico;
+	
+	@NotNull(message = "O Campo Cliente é requerido")
+	@NotBlank(message = "O Campo Cliente é requerido")
 	private Long cliente;
+	
 	private String nomeTecnico;
 	private String nomeCliente;
 
