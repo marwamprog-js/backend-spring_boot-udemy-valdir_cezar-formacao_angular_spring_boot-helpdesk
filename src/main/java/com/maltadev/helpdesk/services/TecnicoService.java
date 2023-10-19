@@ -3,6 +3,8 @@ package com.maltadev.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,17 @@ public class TecnicoService {
 		return tecnicoRepository.save(newObj);
 	}
 
+	public Tecnico update(Long id, @Valid TecnicoDTO dto) {
+		dto.setId(id);
+		
+		Tecnico oldObj = findById(id);
+		validaPorCpfEEmail(dto);
+		
+		oldObj = new Tecnico(dto);	
+		
+		return tecnicoRepository.save(oldObj);
+	}
+	
 	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
 		
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());		
@@ -53,5 +66,6 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 	}
+
 	
 }
