@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.maltadev.helpdesk.services.exceptions.ConstraintViolationException;
 import com.maltadev.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.maltadev.helpdesk.services.exceptions.ObjectNotFoundException;
 
@@ -46,6 +47,20 @@ public class ResourceExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<StandardError> constraintViolationException(
+			ConstraintViolationException ex, HttpServletRequest request) {
+		
+		StandardError error = new StandardError(
+				System.currentTimeMillis(), 
+				HttpStatus.BAD_REQUEST.value(), 
+				"Violação de dados", 
+				ex.getMessage(), 
+				request.getRequestURI());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> methodArgumentNotValidException(
 			MethodArgumentNotValidException ex, HttpServletRequest request) {
@@ -61,5 +76,7 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 		
 	}
+	
+	
 	
 }
