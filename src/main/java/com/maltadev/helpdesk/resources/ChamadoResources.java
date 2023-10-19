@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -48,6 +50,14 @@ public class ChamadoResources {
 		
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ChamadoDTO> update(@PathVariable("id") Long id, 
+			@RequestBody @Valid ChamadoDTO chamadoDTO) {
+		Chamado newObj = chamadoService.update(id, chamadoDTO);
+		return ResponseEntity.ok().body(new ChamadoDTO(newObj));
+	}
+	
 }
 
 
