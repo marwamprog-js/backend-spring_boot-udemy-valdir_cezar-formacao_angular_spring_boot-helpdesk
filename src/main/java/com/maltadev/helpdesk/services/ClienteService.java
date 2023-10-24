@@ -52,6 +52,11 @@ public class ClienteService {
 		dto.setId(id);
 
 		Cliente oldObj = findById(id);
+
+		if(!dto.getSenha().equals(oldObj.getSenha())) {
+			dto.setSenha(encoder.encode(dto.getSenha()));
+		}
+		
 		validaPorCpfEEmail(dto);
 
 		oldObj = new Cliente(dto);
