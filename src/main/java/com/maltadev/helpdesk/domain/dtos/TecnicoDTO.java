@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.maltadev.helpdesk.domain.Tecnico;
 import com.maltadev.helpdesk.domain.enums.Perfil;
+import org.hibernate.validator.constraints.br.CPF;
 
 public class TecnicoDTO implements Serializable {
 
@@ -25,6 +26,7 @@ public class TecnicoDTO implements Serializable {
 	
 	@NotNull(message = "O campo CPF é requerido")
 	@NotBlank(message = "O campo CPF é requerido")
+	@CPF
 	protected String cpf;
 	
 	@NotNull(message = "O campo Email é requerido")

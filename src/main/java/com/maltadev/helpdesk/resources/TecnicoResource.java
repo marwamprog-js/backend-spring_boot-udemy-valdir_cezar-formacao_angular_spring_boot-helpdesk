@@ -1,6 +1,7 @@
 package com.maltadev.helpdesk.resources;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class TecnicoResource {
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> create(@RequestBody @Valid TecnicoDTO objDTO) {
+		objDTO.setDataCriacao(LocalDate.now());
 		Tecnico newObj = tecnicoService.create(objDTO);
 		URI uri = ServletUriComponentsBuilder
 					.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
